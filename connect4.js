@@ -138,7 +138,7 @@ function handleClick(evt) {
   // TODO: check if all cells in board are filled; if so call, call endGame
   if (board.every(function (cell) {
     cell !== null}) === true) {
-    endGame();
+    endGame()
   }
 
   // switch players
