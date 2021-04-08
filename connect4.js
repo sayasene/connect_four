@@ -20,10 +20,10 @@ let board = []; // array of rows, each row is array of cells  (board[y][x])
 function makeBoard() {
   // TODO: set "board" to empty HEIGHT x WIDTH matrix array
   // create empty matrix
-    // create new row (array) HEIGHT times
-      // for each row, create empty cells WIDTH times
-      // push row with empty cells to matrix
-        // return matrix with rows that correspond to HEIGHT and # cells corresponding to WIDTH
+  // create new row (array) HEIGHT times
+  // for each row, create empty cells WIDTH times
+  // push row with empty cells to matrix
+  // return matrix with rows that correspond to HEIGHT and # cells corresponding to WIDTH
   // CR: update index variables to logically match HEIGHT and WIDTH
   for (let y = 0; y < HEIGHT; y++) {
     let row = [];
@@ -66,7 +66,7 @@ function makeHtmlBoard() {
       let cell = document.createElement("td");
       // TODO: add an id, y-x, to the above table cell element
       // you'll use this later, so make sure you use y-x
-      cell.setAttribute("id",`${y}-${x}`);
+      cell.setAttribute("id", `${y}-${x}`);
 
       // TODO: append the table cell to the table row
       row.append(cell);
@@ -103,6 +103,7 @@ function placeInTable(y, x) {
 
 function endGame(msg) {
   // TODO: pop up alert message
+  alert("It's a tie!");
 }
 
 /** handleClick: handle click of column top to play piece */
@@ -120,6 +121,13 @@ function handleClick(evt) {
   // place piece in board and add to HTML table
   // TODO: add line to update in-memory board
   placeInTable(y, x);
+  if (currPlayer === 1) {
+    board[y][x] = 1;
+  }
+  else {
+    board[y][x] = 2;
+  }
+
 
   // check for win
   if (checkForWin()) {
@@ -128,9 +136,19 @@ function handleClick(evt) {
 
   // check for tie
   // TODO: check if all cells in board are filled; if so call, call endGame
+  if (board.every(function (cell) {
+    cell !== null}) === true) {
+    endGame();
+  }
 
   // switch players
   // TODO: switch currPlayer 1 <-> 2
+  if (currPlayer === 1) {
+    currPlayer = 2;
+  }
+  else {
+    currPlayer = 1;
+  }
 }
 
 /** checkForWin: check board cell-by-cell for "does a win start here?" */
