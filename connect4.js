@@ -58,7 +58,7 @@ function makeHtmlBoard() {
   // dynamically creates the main part of html board
   // uses HEIGHT to create table rows
   // uses WIDTH to create table cells for each row
-  for (let y = 0; y < HEIGHT; y++) {
+  for (let y = HEIGHT - 1; y >= 0; y--) {
     // TODO: Create a table row element and assign to a "row" variable
     let row = document.createElement("tr");
     for (let x = 0; x < WIDTH; x++) {
@@ -88,6 +88,15 @@ function findSpotForCol(x) {
 
 function placeInTable(y, x) {
   // TODO: make a div and insert into correct table cell
+  let piece = document.createElement("div");
+  piece.setAttribute("class", "piece");
+  if (currPlayer === 1) {
+    piece.setAttribute("id", "player1");
+  } else {
+    piece.setAttribute("id", "player2");
+  }
+  let cell = document.getElementById(`${y}-${x}`);
+  cell.appendChild(piece);
 }
 
 /** endGame: announce game end */
