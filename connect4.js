@@ -19,12 +19,27 @@ var board = []; // array of rows, each row is array of cells  (board[y][x])
 
 function makeBoard() {
   // TODO: set "board" to empty HEIGHT x WIDTH matrix array
+  // create empty matrix
+    // create new row (array) HEIGHT times
+      // for each row, create empty cells WIDTH times
+      // push row with empty cells to matrix
+        // return matrix with rows that correspond to HEIGHT and # cells corresponding to WIDTH
+  let matrix = [];
+  for (let i = 0; i < HEIGHT; i++) {
+    let row = [];
+    for (let j = 0; j < WIDTH; j++) {
+      row[j] = null;
+    }
+    matrix.push(row);
+  }
+  return matrix;
 }
 
 /** makeHtmlBoard: make HTML table and row of column tops. */
 
 function makeHtmlBoard() {
   // TODO: get "htmlBoard" variable from the item in HTML w/ID of "board"
+  let htmlBoard = document.getElementById("board");
 
   // TODO: add comment for this code
   var top = document.createElement("tr");

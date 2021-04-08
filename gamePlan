@@ -1,0 +1,40 @@
+HTML
+Game board: 
+Container - fixed width height
+7 divs for rows
+within each row 7 divs/spans
+top row chooses column to drop in, other rows
+unclickable
+Game piece: 
+one potential approach: bg color rounded? (might round off the box)
+another approach: append a CSS gamepiece, 
+another approach: each gameboard box has a white colored piece in it, changes color based on which player is moving
+JS
+array of arrays - 
+[[0,0,0,0,0,0,0],
+[0,0,0,0,0,0,0],
+[0,0,0,0,0,0,0],
+[0,0,0,0,0,0,1],
+[0,0,0,0,0,0,1]
+[0,0,0,0,0,0,1]
+[0,0,0,0,0,0,1]]
+e.g. starting from last array, check if arr[n][6] = 0,1,2, if not 0, n--
+win conditions:
+e.g. vertical win arr[6][6]=1  arr[5][6]=1  arr[4][6]=1  arr[3][6]=1
+horizontal win arr[6][0]=1  arr[6][1]=1  arr[6][2]=1  arr[6][3]=1
+diagonal win arr[6][6]=1 arr[5][5]=1 arr[4][4]=1 arr[3][3]=1
+CSS
+class for drop in row
+class for non-interactive gameboard (no pointer events)
+class for red piece
+class for blue piece
+flow of the game:
+player 1 clicks a top row element which sets a nested array value
+loop is fixed based on which top row element is selected, loop thorugh each nested array from the back of the overall array based on 0,1,2
+checking for a winner:
+tracking total counts of moves, min must be 8
+call a function checkWinner();
+-checks vertical, horizontal, diagonal wins for either player 1 or player 2
+functions that would be useful:
+checkWinner(); -> potentially break out into 3 separate check functions
+dropPiece();
