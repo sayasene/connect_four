@@ -58,7 +58,7 @@ function makeHtmlBoard() {
   // dynamically creates the main part of html board
   // uses HEIGHT to create table rows
   // uses WIDTH to create table cells for each row
-  for (let y = HEIGHT - 1; y >= 0; y--) {
+  for (let y = 0; y < HEIGHT; y++) {
     // TODO: Create a table row element and assign to a "row" variable
     let row = document.createElement("tr");
     for (let x = 0; x < WIDTH; x++) {
@@ -81,7 +81,12 @@ function makeHtmlBoard() {
 
 function findSpotForCol(x) {
   // TODO: write the real version of this, rather than always returning 0
-  return 0;
+  for (let y = HEIGHT - 1; y >= 0; y--) {
+    if (board[y][x] === null) {
+      return y;
+    }
+  }
+  return null;
 }
 
 /** placeInTable: update DOM to place piece into HTML table of board */
@@ -103,7 +108,7 @@ function placeInTable(y, x) {
 
 function endGame(msg) {
   // TODO: pop up alert message
-  alert("It's a tie!");
+  alert(msg);
 }
 
 /** handleClick: handle click of column top to play piece */
@@ -136,10 +141,13 @@ function handleClick(evt) {
 
   // check for tie
   // TODO: check if all cells in board are filled; if so call, call endGame
-  if (board.every(function (cell) {
-    cell !== null}) === true) {
-    endGame()
-  }
+  // for (let row of board) {
+  //   // for every row(subarray in board) in board, checking if each cell is not null
+  //   row.every(function(val) {
+  //     val !== null;
+  //   })
+  //   endGame("It's a tie!");
+  // }
 
   // switch players
   // TODO: switch currPlayer 1 <-> 2
@@ -164,7 +172,24 @@ function checkForWin() {
 
     // TODO: Check four cells to see if they're all legal & all color of current
     // player
+    // if out of bounds or diff colors, return false
+      // else return true
+    // for (let cell of cells) {
+    //   if (cell === null) {
+    //     return false;
+    //   }
+    //   if (cell[0] >= 0 && cell[0] < HEIGHT && cell[1] >= 0 && cell[1] < WIDTH && board[cell[0]][cell[1]] === cur) {
 
+    //   }
+    // }
+    return cells.every(
+      ([y, x]) =>
+        y >= 0 &&
+        y < HEIGHT &&
+        x >= 0 &&
+        x < WIDTH &&
+        board[y][x] === currPlayer
+    );
   }
 
   // using HEIGHT and WIDTH, generate "check list" of coordinates
@@ -178,9 +203,9 @@ function checkForWin() {
       // [ [y, x], [y, x], [y, x], [y, x] ]
 
       let horiz = [[y, x], [y, x + 1], [y, x + 2], [y, x + 3]];
-      let vert;
-      let diagDL;
-      let diagDR;
+      let vert = [[y, x], [y + 1, x], [y + 2, x], [y + 3, x]];
+      let diagDL = [[y, x], [y - 1, x - 1], [y - 2, x - 2], [y - 3, x - 3]]
+      let diagDR = [[y, x], [y - 1, x + 1], [y - 2, x + 2], [y - 3, x + 3]];
 
       // find winner (only checking each win-possibility as needed)
       if (_win(horiz) || _win(vert) || _win(diagDR) || _win(diagDL)) {
